@@ -12,6 +12,7 @@ import java.util.List;
 
 import static eu.uhk.devschool.shoppinglist.web.constant.WebConstant.SHOPPING_ITEM_URL;
 import static eu.uhk.devschool.shoppinglist.web.constant.WebConstant.SHOPPING_LIST_URL;
+import static eu.uhk.devschool.shoppinglist.web.constant.WebConstant.SHOPING_ITEM_BY_ID;
 
 @CrossOrigin
 @RestController
@@ -44,5 +45,11 @@ public class ShoppingItemController {
     public ShoppingItem deleteShoppingItem(@RequestBody ShoppingItem shoppingItemId) {
         LOGGER.info("Received DELETE request with body {}", shoppingItemId);
         return shoppingItemService.deleteShoppingItem(shoppingItemId);
+    }
+
+    @GetMapping(path = SHOPING_ITEM_BY_ID, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ShoppingItem getShoppingItem(@PathVariable Long id) {
+        LOGGER.info("Received GET request with id {}", id);
+        return shoppingItemService.getShoppingItem(id);
     }
 }

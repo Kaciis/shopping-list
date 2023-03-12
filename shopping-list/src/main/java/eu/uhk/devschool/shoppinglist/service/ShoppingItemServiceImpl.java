@@ -70,9 +70,16 @@ public class ShoppingItemServiceImpl implements ShoppingItemService {
         if (validationResult.isValid()) {
             return shoppingItemRepository.save(shoppingItem);
         } else {
-            String message = String.format("These validation errors have been detected: %s", validationResult.getErrors());
+            String message = String.format("These validation errors have been detected: %s",
+                    validationResult.getErrors());
             LOGGER.error(message);
             throw new ValidationException(message);
         }
+    }
+
+    @Override
+    public ShoppingItem getShoppingItem(Long id) {
+        LOGGER.info("#getShoppingItem method started with id {}", id);
+        return shoppingItemRepository.findById(id).get();
     }
 }
